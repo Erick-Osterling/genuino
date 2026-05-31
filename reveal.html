@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado — genuino</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">genuino</a>
+  <div class="nav-links">
+    <a href="profile.html">perfil</a>
+    <a href="learn.html">bitcoin</a>
+  </div>
+</nav>
+
+<main class="page fade-up">
+
+  <span class="tag">comparación</span>
+  <h1>Las respuestas juntas.</h1>
+  <p style="margin:.5rem 0 2rem; font-style:italic; font-family:var(--serif)">Sin edición. Sin filtros.</p>
+
+  <div id="compare-section"></div>
+
+  <div class="divider"></div>
+
+  <span class="tag">compatibilidad</span>
+  <div style="margin: 1.25rem 0 1rem">
+    <div class="score-big" id="score-num">—</div>
+    <div class="score-sub">afinidad estimada</div>
+    <div class="bar-track"><div class="bar-fill" id="bar-fill"></div></div>
+  </div>
+
+  <div class="card" id="score-card">
+    <span class="tag">lectura</span>
+    <p id="score-msg" style="color:var(--text); font-size:14px; line-height:1.75"></p>
+  </div>
+
+  <div class="card" id="genie-card" style="display:none">
+    <span class="tag">lo que le preguntarías al genio</span>
+    <p id="genie-echo" style="color:var(--text); font-size:14px; line-height:1.75; font-style:italic"></p>
+    <p style="font-size:12px; color:var(--text3); margin-top:.5rem">
+      Esa respuesta dice más sobre vos que cualquier perfil. Me importa leerla.
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="tag">contacto directo</span>
+    <p style="margin-bottom:.75rem">Sin plataformas, sin intermediarios. Si algo te resonó, escribime.</p>
+    <div class="copy-row" onclick="copyMail()">
+      <span id="mail-txt">matias@proton.me — click para copiar</span>
+    </div>
+    <p style="font-size:11px; color:var(--text3); margin-top:.5rem">
+      También en Session o SimpleX si preferís privacidad total.
+    </p>
+  </div>
+
+  <div class="card">
+    <span class="tag">¿primera vez que escuchás sobre Bitcoin?</span>
+    <p style="margin-bottom:.75rem">Participar en esta app requiere entender por qué el dinero descentralizado importa. No es obligatorio ahora, pero te va a cambiar la perspectiva.</p>
+    <a href="learn.html" class="btn" style="margin-top:0">Entender Bitcoin →</a>
+  </div>
+
+  <a href="index.html" class="btn" style="margin-top:.5rem">← volver al inicio</a>
+
+</main>
+
+<script>
+async function init() {
+  const answersRaw = sessionStorage.getItem('genuino_answers');
+  if (!answersRaw) {
+    window.location.href = 'questions.html';
+    return;
+  }
+  const myAnswers = JSON.parse(answersRaw);
+
+  const [qRes, pRes] = await Promise.all([
+    fetch('assets/questions.json'),
+    fetch('assets/profile.json')
+  ]);
+  const qData   = await qRes.json();
+  const profile = await pRes.json();
+
+  buildCompare(qData, profile, myAnswers);
+  calcScore(qData, profile, myAnswers);
+}
+
+function buildCompare(qData, profile, myAnswers) {
+  const container = document.getElementById('compare-section');
+
+  qData.levels.forEach(level => {
+    const block = document.createElement('div');
+    block.style.cssText = 'margin-bottom:1.5rem';
+    block.innerHTML = `
+      <div style="margin-bottom:.75rem; padding-bottom:.4rem; border-bottom:.5px solid var(--border)">
+        <span class="tag" style="margin-bottom:.2rem">nivel ${level.id}</span>
+        <h2 style="font-size:16px">${level.title}</h2>
+      </div>
+    `;
+
+    level.questions.forEach(q => {
+      const profileAns = profile.answers[q.id] || '—';
+      const userAns    = myAnswers[q.id] || '(sin respuesta)';
+
+      const qLabel = q.text.length > 80 ? q.text.substring(0, 80) + '…' : q.text;
+
+      block.innerHTML += `
+        <div style="margin-bottom:10px">
+          <div class="tag" style="margin-bottom:6px">${qLabel}</div>
+          <div class="pair">
+            <div class="pair-side">
+              <div class="pair-who">Matías</div>
+              <div class="pair-val">${profileAns}</div>
+            </div>
+            <div class="pair-side">
+              <div class="pair-who">Tú</div>
+              <div class="pair-val">${userAns}</div>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.appendChild(block);
+  });
+}
+
+function calcScore(qData, profile, myAnswers) {
+  // Select questions contribute to score
+  let matches = 0;
+  let selectTotal = 0;
+  let hasOpenAnswers = 0;
+
+  qData.levels.forEach(level => {
+    level.questions.forEach(q => {
+      if (q.type === 'select') {
+        selectTotal++;
+        if (myAnswers[q.id] && myAnswers[q.id] === profile.answers[q.id]) matches++;
+      }
+      if (q.type === 'open' && myAnswers[q.id] && myAnswers[q.id].length > 15) {
+        hasOpenAnswers++;
+      }
+    });
+  });
+
+  const selectScore  = selectTotal > 0 ? (matches / selectTotal) * 60 : 0;
+  const openBonus    = Math.min(hasOpenAnswers * 5, 30);
+  const baseScore    = 10;
+  let score = Math.round(baseScore + selectScore + openBonus);
+  score = Math.min(score, 99);
+
+  document.getElementById('score-num').textContent = score + '%';
+  setTimeout(() => {
+    document.getElementById('bar-fill').style.width = score + '%';
+  }, 150);
+
+  let msg = '';
+  if (score >= 75) {
+    msg = 'Hay mucho terreno común en lo que importa. No solo en actividades — en cómo ves el tiempo, el dinero y lo que buscás en otro. Eso es raro.';
+  } else if (score >= 50) {
+    msg = 'Hay puntos de contacto reales, y también diferencias. A veces eso es más interesante que la coincidencia total.';
+  } else {
+    msg = 'Mundos distintos en varios aspectos. Pero la pregunta del genio me sigue interesando — eso no se mide con porcentajes.';
+  }
+  document.getElementById('score-msg').textContent = msg;
+
+  const genieAnswer = myAnswers['q4_1'];
+  if (genieAnswer && genieAnswer.length > 5) {
+    document.getElementById('genie-card').style.display = 'block';
+    document.getElementById('genie-echo').textContent = genieAnswer;
+  }
+}
+
+function copyMail() {
+  navigator.clipboard.writeText('matias@proton.me').catch(() => {});
+  const el = document.getElementById('mail-txt');
+  el.textContent = '✓ copiado';
+  setTimeout(() => { el.textContent = 'matias@proton.me — click para copiar'; }, 1800);
+}
+
+init();
+</script>
+
+</body>
+</html>

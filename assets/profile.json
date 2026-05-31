@@ -1,0 +1,20 @@
+{
+  "version": "1.0.0",
+  "name": "Matías",
+  "created": "2025-05-31",
+  "hash_note": "SHA256 de este archivo anclado via OpenTimestamps — ver crypto/timestamps.ots",
+  "answers": {
+    "q1_1": "Levantarme sin alarma, ver si hay olas, entrar al agua antes de pensar en nada.",
+    "q1_2": "Leer filosofía política en papel, sin subrayar para compartir después.",
+    "q1_3": "El ruido social",
+    "q1_4": "Programando un protocolo de firma digital a las 2am.",
+    "q2_1": "Que el dinero emitido por gobiernos es neutro. No lo es.",
+    "q2_2": "Fijas en la base, flexibles arriba",
+    "q2_3": "Herramienta de libertad, no fin. Pero hay que entender cómo funciona realmente.",
+    "q2_4": "Confiar primero",
+    "q3_1": "Una infraestructura para que personas se conecten sin que nadie intermedie ni monetice eso.",
+    "q3_2": "Una economía donde el esfuerzo de cada persona no pueda ser devaluado sin su consentimiento.",
+    "q3_3": "Cómo funciona el dinero realmente. No como te lo enseñaron en el colegio.",
+    "q4_1": "¿Cuáles son los mecanismos reales por los que los humanos coordinamos a escala, y qué los hace colapsar?"
+  }
+}

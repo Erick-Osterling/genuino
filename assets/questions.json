@@ -1,0 +1,109 @@
+{
+  "version": "1.0.0",
+  "updated": "2025-05-31",
+  "levels": [
+    {
+      "id": 1,
+      "title": "¿Quién sos?",
+      "desc": "concreto · sin ideología",
+      "questions": [
+        {
+          "id": "q1_1",
+          "text": "¿Cómo es tu mañana ideal cuando no tenés obligaciones?",
+          "type": "open",
+          "reveals": "Ritmo de vida, si necesita naturaleza o ciudad, movimiento o quietud."
+        },
+        {
+          "id": "q1_2",
+          "text": "¿Qué es algo que hacés solo porque genuinamente te gusta, sin audiencia?",
+          "type": "open",
+          "reveals": "Separa identidad real de identidad performativa."
+        },
+        {
+          "id": "q1_3",
+          "text": "¿Qué te agota más: el ruido social o el silencio prolongado?",
+          "type": "select",
+          "options": ["El ruido social", "El silencio prolongado", "Depende mucho del contexto"],
+          "reveals": "Introversión / extroversión sin usar esas palabras."
+        },
+        {
+          "id": "q1_4",
+          "text": "¿Cuándo fue la última vez que perdiste la noción del tiempo haciendo algo?",
+          "type": "open",
+          "reveals": "Revela el estado de flow real — lo que más importa sin que la persona lo sepa."
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "¿Cómo ves el mundo?",
+      "desc": "valores · sin etiquetas",
+      "questions": [
+        {
+          "id": "q2_1",
+          "text": "¿Hay algo que la mayoría da por sentado y vos cuestionás?",
+          "type": "open",
+          "reveals": "Mide pensamiento independiente real."
+        },
+        {
+          "id": "q2_2",
+          "text": "¿Preferís reglas claras y fijas, o negociables según el contexto?",
+          "type": "select",
+          "options": ["Claras y fijas", "Negociables según contexto", "Fijas en la base, flexibles arriba"],
+          "reveals": "Tolerancia a la ambigüedad y modelo mental de justicia."
+        },
+        {
+          "id": "q2_3",
+          "text": "¿Qué rol debería tener el dinero en una vida bien vivida?",
+          "type": "open",
+          "reveals": "Relación con economía, trabajo y libertad."
+        },
+        {
+          "id": "q2_4",
+          "text": "¿Preferís confiar primero y ajustar, o desconfiar primero y abrirte de a poco?",
+          "type": "select",
+          "options": ["Confiar primero", "Desconfiar primero", "Evalúo caso por caso"],
+          "reveals": "Modelo de vínculo — sistema abierto o cerrado por defecto."
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "¿Hacia dónde vas?",
+      "desc": "propósito · dirección",
+      "questions": [
+        {
+          "id": "q3_1",
+          "text": "¿Estás construyendo algo ahora mismo, aunque sea pequeño?",
+          "type": "open",
+          "reveals": "Separa personas en movimiento de personas en espera."
+        },
+        {
+          "id": "q3_2",
+          "text": "¿Qué querés que exista en 10 años que hoy no existe?",
+          "type": "open",
+          "reveals": "Muestra si alguien piensa en sí mismo o en algo más grande."
+        },
+        {
+          "id": "q3_3",
+          "text": "¿Tenés algo que le enseñarías a casi cualquier persona si pudieras?",
+          "type": "open",
+          "reveals": "Revela qué considera valioso y si tiene impulso de compartir."
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "La pregunta del genio",
+      "desc": "jerarquía de valores real",
+      "questions": [
+        {
+          "id": "q4_1",
+          "text": "Vas caminando por una playa al atardecer. Ves un destello en la orilla. Hay una botella. Sale un genio — no te ofrece deseos, te ofrece una sola cosa: la verdad absoluta sobre cualquier tema, cualquier pregunta, cualquier duda. Una respuesta completa y verificable. ¿Qué le preguntás?",
+          "type": "open",
+          "reveals": "Jerarquía de valores real sin que la persona lo sepa conscientemente."
+        }
+      ]
+    }
+  ]
+}

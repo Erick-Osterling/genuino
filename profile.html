@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matías — genuino</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">genuino</a>
+  <div class="nav-links">
+    <a href="profile.html">perfil</a>
+    <a href="learn.html">bitcoin</a>
+    <a href="questions.html">empezar</a>
+  </div>
+</nav>
+
+<main class="page fade-up">
+
+  <span class="tag">perfil</span>
+  <h1>Matías.</h1>
+  <p style="margin: .5rem 0 2rem; font-size:15px; color:var(--text2); font-family:var(--serif); font-style:italic">
+    Surfo, construyo tecnología descentralizada, leo filosofía y economía.<br>
+    Creo que el amor es encontrar a alguien que camine hacia algo contigo.
+  </p>
+
+  <div id="profile-answers"></div>
+
+  <div class="card" style="margin-top:1.5rem">
+    <span class="tag">verificación</span>
+    <p style="margin-bottom:.75rem">Estas respuestas fueron hasheadas y ancladas en Bitcoin antes de que vos llegaras. Podés verificar que no fueron modificadas después.</p>
+    <div class="copy-row" id="hash-row" onclick="copyHash()">
+      <span id="hash-txt">SHA256: cargando...</span>
+    </div>
+    <p style="font-size:11px; color:var(--text3); margin-top:.5rem">
+      v2 (próximamente): ancla verificable via OpenTimestamps →
+      <a href="https://opentimestamps.org" target="_blank" style="color:var(--text3)">opentimestamps.org</a>
+    </p>
+  </div>
+
+  <a href="questions.html" class="btn primary" style="margin-top:1.5rem">Responder las mismas preguntas →</a>
+
+</main>
+
+<script>
+async function loadProfile() {
+  const [profileRes, questionsRes] = await Promise.all([
+    fetch('assets/profile.json'),
+    fetch('assets/questions.json')
+  ]);
+  const profile = await profileRes.json();
+  const data    = await questionsRes.json();
+
+  const container = document.getElementById('profile-answers');
+
+  data.levels.forEach(level => {
+    const levelEl = document.createElement('div');
+    levelEl.style.cssText = 'margin-bottom:1.5rem';
+
+    const header = document.createElement('div');
+    header.style.cssText = 'margin-bottom:.75rem; padding-bottom:.5rem; border-bottom:.5px solid var(--border)';
+    header.innerHTML = `
+      <span class="tag" style="margin-bottom:.25rem">${level.id === 4 ? 'nivel ' + level.id + ' — especial' : 'nivel ' + level.id}</span>
+      <h2 style="font-size:18px">${level.title}</h2>
+    `;
+    levelEl.appendChild(header);
+
+    level.questions.forEach(q => {
+      const answer = profile.answers[q.id] || '—';
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <span class="tag" style="margin-bottom:.5rem">${q.text.length > 80 ? q.text.substring(0, 80) + '…' : q.text}</span>
+        <p style="font-size:14px; color:var(--text); line-height:1.7">${answer}</p>
+      `;
+      levelEl.appendChild(card);
+    });
+
+    container.appendChild(levelEl);
+  });
+
+  // Compute hash of profile answers
+  const text = JSON.stringify(profile.answers);
+  const msgBuffer = new TextEncoder().encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  document.getElementById('hash-txt').textContent =
+    'SHA256: ' + hashHex.substring(0, 8) + '...' + hashHex.substring(56);
+  document.getElementById('hash-row').dataset.full = hashHex;
+}
+
+function copyHash() {
+  const row = document.getElementById('hash-row');
+  const full = row.dataset.full;
+  if (full) {
+    navigator.clipboard.writeText(full).catch(() => {});
+    document.getElementById('hash-txt').textContent = '✓ hash copiado';
+    setTimeout(() => {
+      document.getElementById('hash-txt').textContent =
+        'SHA256: ' + full.substring(0, 8) + '...' + full.substring(56);
+    }, 1800);
+  }
+}
+
+loadProfile();
+</script>
+
+</body>
+</html>
