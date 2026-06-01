@@ -26,10 +26,10 @@
 
   <div class="divider"></div>
 
-  <span class="tag">compatibilidad</span>
+  <span class="tag">en común</span>
   <div style="margin: 1.25rem 0 1rem">
     <div class="score-big" id="score-num">—</div>
-    <div class="score-sub">afinidad estimada</div>
+    <div class="score-sub">cosas en común</div>
     <div class="bar-track"><div class="bar-fill" id="bar-fill"></div></div>
   </div>
 
@@ -38,29 +38,12 @@
     <p id="score-msg" style="color:var(--text); font-size:14px; line-height:1.75"></p>
   </div>
 
-  <div class="card" id="genie-card" style="display:none">
-    <span class="tag">lo que le preguntarías al genio</span>
-    <p id="genie-echo" style="color:var(--text); font-size:14px; line-height:1.75; font-style:italic"></p>
-    <p style="font-size:12px; color:var(--text3); margin-top:.5rem">
-      Esa respuesta dice más sobre vos que cualquier perfil. Me importa leerla.
-    </p>
-  </div>
-
   <div class="card">
     <span class="tag">contacto directo</span>
-    <p style="margin-bottom:.75rem">Sin plataformas, sin intermediarios. Si algo te resonó, escribime.</p>
+    <p style="margin-bottom:.75rem">Sin plataformas, sin intermediarios. Si algo te resonó, escribile directo.</p>
     <div class="copy-row" onclick="copyMail()">
-      <span id="mail-txt">matias@proton.me — click para copiar</span>
+      <span id="mail-txt">pedro@proton.me — click para copiar</span>
     </div>
-    <p style="font-size:11px; color:var(--text3); margin-top:.5rem">
-      También en Session o SimpleX si preferís privacidad total.
-    </p>
-  </div>
-
-  <div class="card">
-    <span class="tag">¿primera vez que escuchás sobre Bitcoin?</span>
-    <p style="margin-bottom:.75rem">Participar en esta app requiere entender por qué el dinero descentralizado importa. No es obligatorio ahora, pero te va a cambiar la perspectiva.</p>
-    <a href="learn.html" class="btn" style="margin-top:0">Entender Bitcoin →</a>
   </div>
 
   <a href="index.html" class="btn" style="margin-top:.5rem">← volver al inicio</a>
@@ -160,26 +143,20 @@ function calcScore(profile, profileAnswers, myAnswers) {
 
   let msg = '';
   if (score >= 75) {
-    msg = 'Hay mucho terreno común en lo que importa. No solo en actividades — en cómo ves el tiempo, el dinero y lo que buscás en otro. Eso es raro.';
+    msg = 'Bastante en común. No solo en gustos — en cómo ven el día a día y lo que les importa. Vale la pena seguir la conversación.';
   } else if (score >= 50) {
-    msg = 'Hay puntos de contacto reales, y también diferencias. A veces eso es más interesante que la coincidencia total.';
+    msg = 'Algunas cosas en común, otras no tanto. A veces eso hace la conversación más interesante que la coincidencia total.';
   } else {
-    msg = 'Mundos distintos en varios aspectos. Pero la pregunta del genio me sigue interesando — eso no se mide con porcentajes.';
+    msg = 'Mundos bastante distintos. Pero eso también dice algo — y las diferencias a veces son lo más interesante.';
   }
   document.getElementById('score-msg').textContent = msg;
-
-  const genieAnswer = myAnswers['q4_1'];
-  if (genieAnswer && genieAnswer.length > 5) {
-    document.getElementById('genie-card').style.display = 'block';
-    document.getElementById('genie-echo').textContent = genieAnswer;
-  }
 }
 
 function copyMail() {
-  navigator.clipboard.writeText('matias@proton.me').catch(() => {});
+  navigator.clipboard.writeText('pedro@proton.me').catch(() => {});
   const el = document.getElementById('mail-txt');
   el.textContent = '✓ copiado';
-  setTimeout(() => { el.textContent = 'matias@proton.me — click para copiar'; }, 1800);
+  setTimeout(() => { el.textContent = 'pedro@proton.me — click para copiar'; }, 1800);
 }
 
 init();
