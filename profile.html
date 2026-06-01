@@ -49,10 +49,11 @@ async function loadProfile() {
   const profileRes = await fetch('assets/profile.json');
   const profile    = await profileRes.json();
 
-  const container   = document.getElementById('profile-answers');
-  const hasAnswered = !!sessionStorage.getItem('genuino_answers');
+  const container  = document.getElementById('profile-answers');
+  const canView    = !!sessionStorage.getItem('genuino_profile_unlocked');
+  sessionStorage.removeItem('genuino_profile_unlocked');
 
-  if (!hasAnswered) {
+  if (!canView) {
     container.innerHTML = `
       <div class="card" style="text-align:center; padding:2rem 1.5rem">
         <p style="font-size:15px; color:var(--text2); margin-bottom:1.25rem; line-height:1.75">

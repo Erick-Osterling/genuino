@@ -69,6 +69,8 @@ async function init() {
   const profileAnswers = {};
   profile.sets.forEach(set => set.questions.forEach(q => { profileAnswers[q.id] = q.answer; }));
 
+  sessionStorage.setItem('genuino_profile_unlocked', '1');
+
   buildCompare(profile, profileAnswers, myAnswers);
   calcScore(profile, profileAnswers, myAnswers);
 }
