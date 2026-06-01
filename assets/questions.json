@@ -1,9 +1,9 @@
 {
-  "version": "1.0.0",
-  "updated": "2025-05-31",
-  "levels": [
+  "version": "2.0.0",
+  "updated": "2026-05-31",
+  "topics": [
     {
-      "id": 1,
+      "id": "quien-sos",
       "title": "¿Quién sos?",
       "desc": "concreto · sin ideología",
       "questions": [
@@ -35,7 +35,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "como-ves-el-mundo",
       "title": "¿Cómo ves el mundo?",
       "desc": "valores · sin etiquetas",
       "questions": [
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "hacia-donde-vas",
       "title": "¿Hacia dónde vas?",
       "desc": "propósito · dirección",
       "questions": [
@@ -93,7 +93,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "la-pregunta-del-genio",
       "title": "La pregunta del genio",
       "desc": "jerarquía de valores real",
       "questions": [

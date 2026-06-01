@@ -1,20 +1,99 @@
 {
-  "version": "1.0.0",
-  "name": "Matías",
-  "created": "2025-05-31",
+  "version": "2.0.0",
+  "name": "Pedro",
+  "age": 16,
+  "created": "2026-05-31",
   "hash_note": "SHA256 de este archivo anclado via OpenTimestamps — ver crypto/timestamps.ots",
-  "answers": {
-    "q1_1": "Levantarme sin alarma, ver si hay olas, entrar al agua antes de pensar en nada.",
-    "q1_2": "Leer filosofía política en papel, sin subrayar para compartir después.",
-    "q1_3": "El ruido social",
-    "q1_4": "Programando un protocolo de firma digital a las 2am.",
-    "q2_1": "Que el dinero emitido por gobiernos es neutro. No lo es.",
-    "q2_2": "Fijas en la base, flexibles arriba",
-    "q2_3": "Herramienta de libertad, no fin. Pero hay que entender cómo funciona realmente.",
-    "q2_4": "Confiar primero",
-    "q3_1": "Una infraestructura para que personas se conecten sin que nadie intermedie ni monetice eso.",
-    "q3_2": "Una economía donde el esfuerzo de cada persona no pueda ser devaluado sin su consentimiento.",
-    "q3_3": "Cómo funciona el dinero realmente. No como te lo enseñaron en el colegio.",
-    "q4_1": "¿Cuáles son los mecanismos reales por los que los humanos coordinamos a escala, y qué los hace colapsar?"
-  }
+  "sets": [
+    {
+      "id": "lo-basico",
+      "title": "Lo básico",
+      "desc": "el día a día",
+      "requires": [],
+      "questions": [
+        {
+          "id": "p1_1",
+          "text": "¿Qué hacés lo primero cuando llegás a tu casa?",
+          "type": "open",
+          "answer": "Me tiro en la cama cinco minutos que terminan siendo una hora.",
+          "hash": ""
+        },
+        {
+          "id": "p1_2",
+          "text": "¿Preferís los planes espontáneos o con tiempo?",
+          "type": "select",
+          "options": ["Espontáneos", "Con tiempo", "Depende con quién"],
+          "answer": "Depende con quién",
+          "hash": ""
+        },
+        {
+          "id": "p1_3",
+          "text": "¿Qué harías si mañana no tuvieras colegio ni obligaciones?",
+          "type": "open",
+          "answer": "Jugar hasta tarde, pedir pizza y ver algo con mis amigos.",
+          "hash": ""
+        }
+      ]
+    },
+    {
+      "id": "gustos",
+      "title": "Gustos",
+      "desc": "música, series, lo que te engancha",
+      "requires": ["lo-basico"],
+      "questions": [
+        {
+          "id": "p2_1",
+          "text": "¿Qué música ponés cuando estás solo en tu cuarto?",
+          "type": "open",
+          "answer": "Trap y un poco de rock argentino. Depende del humor.",
+          "hash": ""
+        },
+        {
+          "id": "p2_2",
+          "text": "¿Tenés alguna serie o juego que te tiene enganchado ahora?",
+          "type": "open",
+          "answer": "Estoy rejugando GTA y viendo Peaky Blinders por segunda vez.",
+          "hash": ""
+        },
+        {
+          "id": "p2_3",
+          "text": "¿Preferís salir o quedarte en casa el fin de semana?",
+          "type": "select",
+          "options": ["Salir siempre", "Quedarme en casa", "Mitad y mitad"],
+          "answer": "Mitad y mitad",
+          "hash": ""
+        }
+      ]
+    },
+    {
+      "id": "amigos-y-planes",
+      "title": "Amigos y planes",
+      "desc": "cómo sos con los demás",
+      "requires": ["gustos"],
+      "questions": [
+        {
+          "id": "p3_1",
+          "text": "¿Preferís salir con mucha gente o con pocos amigos?",
+          "type": "select",
+          "options": ["Mucha gente", "Pocos amigos", "Solo"],
+          "answer": "Pocos amigos",
+          "hash": ""
+        },
+        {
+          "id": "p3_2",
+          "text": "¿Tenés un lugar favorito donde te gusta estar?",
+          "type": "open",
+          "answer": "La terraza de lo de mi amigo Santi. Se ve toda la ciudad.",
+          "hash": ""
+        },
+        {
+          "id": "p3_3",
+          "text": "¿Hay algo que te gustaría aprender pero todavía no arrancaste?",
+          "type": "open",
+          "answer": "Tocar guitarra. Lo intenté y me rendí, pero lo quiero intentar de nuevo.",
+          "hash": ""
+        }
+      ]
+    }
+  ]
 }

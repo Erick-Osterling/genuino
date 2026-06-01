@@ -83,25 +83,28 @@ async function init() {
   const qData   = await qRes.json();
   const profile = await pRes.json();
 
-  buildCompare(qData, profile, myAnswers);
-  calcScore(qData, profile, myAnswers);
+  const profileAnswers = {};
+  profile.sets.forEach(set => set.questions.forEach(q => { profileAnswers[q.id] = q.answer; }));
+
+  buildCompare(profile, profileAnswers, myAnswers);
+  calcScore(profile, profileAnswers, myAnswers);
 }
 
-function buildCompare(qData, profile, myAnswers) {
+function buildCompare(profile, profileAnswers, myAnswers) {
   const container = document.getElementById('compare-section');
 
-  qData.levels.forEach(level => {
+  profile.sets.forEach((set, idx) => {
     const block = document.createElement('div');
     block.style.cssText = 'margin-bottom:1.5rem';
     block.innerHTML = `
       <div style="margin-bottom:.75rem; padding-bottom:.4rem; border-bottom:.5px solid var(--border)">
-        <span class="tag" style="margin-bottom:.2rem">nivel ${level.id}</span>
-        <h2 style="font-size:16px">${level.title}</h2>
+        <span class="tag" style="margin-bottom:.2rem">nivel ${idx + 1}</span>
+        <h2 style="font-size:16px">${set.title}</h2>
       </div>
     `;
 
-    level.questions.forEach(q => {
-      const profileAns = profile.answers[q.id] || '—';
+    set.questions.forEach(q => {
+      const profileAns = profileAnswers[q.id] || '—';
       const userAns    = myAnswers[q.id] || '(sin respuesta)';
 
       const qLabel = q.text.length > 80 ? q.text.substring(0, 80) + '…' : q.text;
@@ -111,7 +114,7 @@ function buildCompare(qData, profile, myAnswers) {
           <div class="tag" style="margin-bottom:6px">${qLabel}</div>
           <div class="pair">
             <div class="pair-side">
-              <div class="pair-who">Matías</div>
+              <div class="pair-who">${profile.name}</div>
               <div class="pair-val">${profileAns}</div>
             </div>
             <div class="pair-side">
@@ -127,17 +130,16 @@ function buildCompare(qData, profile, myAnswers) {
   });
 }
 
-function calcScore(qData, profile, myAnswers) {
-  // Select questions contribute to score
+function calcScore(profile, profileAnswers, myAnswers) {
   let matches = 0;
   let selectTotal = 0;
   let hasOpenAnswers = 0;
 
-  qData.levels.forEach(level => {
-    level.questions.forEach(q => {
+  profile.sets.forEach(set => {
+    set.questions.forEach(q => {
       if (q.type === 'select') {
         selectTotal++;
-        if (myAnswers[q.id] && myAnswers[q.id] === profile.answers[q.id]) matches++;
+        if (myAnswers[q.id] && myAnswers[q.id] === profileAnswers[q.id]) matches++;
       }
       if (q.type === 'open' && myAnswers[q.id] && myAnswers[q.id].length > 15) {
         hasOpenAnswers++;

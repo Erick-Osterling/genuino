@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Matías — genuino</title>
+  <title>Pedro — genuino</title>
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
@@ -20,10 +20,10 @@
 <main class="page fade-up">
 
   <span class="tag">perfil</span>
-  <h1>Matías.</h1>
+  <h1>Pedro.</h1>
   <p style="margin: .5rem 0 2rem; font-size:15px; color:var(--text2); font-family:var(--serif); font-style:italic">
-    Surfo, construyo tecnología descentralizada, leo filosofía y economía.<br>
-    Creo que el amor es encontrar a alguien que camine hacia algo contigo.
+    16 años. Música, amigos y demasiadas horas de pantalla.<br>
+    Todavía no sé qué quiero ser, pero sé lo que me importa.
   </p>
 
   <div id="profile-answers"></div>
@@ -46,29 +46,41 @@
 
 <script>
 async function loadProfile() {
-  const [profileRes, questionsRes] = await Promise.all([
-    fetch('assets/profile.json'),
-    fetch('assets/questions.json')
-  ]);
-  const profile = await profileRes.json();
-  const data    = await questionsRes.json();
+  const profileRes = await fetch('assets/profile.json');
+  const profile    = await profileRes.json();
 
-  const container = document.getElementById('profile-answers');
+  const container   = document.getElementById('profile-answers');
+  const hasAnswered = !!sessionStorage.getItem('genuino_answers');
 
-  data.levels.forEach(level => {
+  if (!hasAnswered) {
+    container.innerHTML = `
+      <div class="card" style="text-align:center; padding:2rem 1.5rem">
+        <p style="font-size:15px; color:var(--text2); margin-bottom:1.25rem; line-height:1.75">
+          Las respuestas de Pedro se revelan<br>después de que respondas las tuyas.
+        </p>
+        <a href="questions.html" class="btn primary">Responder primero →</a>
+      </div>
+    `;
+    document.querySelector('.btn.primary[href="questions.html"]').style.display = 'none';
+    document.getElementById('hash-row').parentElement.style.display = 'none';
+    return;
+  }
+
+  profile.sets.forEach((set, idx) => {
     const levelEl = document.createElement('div');
     levelEl.style.cssText = 'margin-bottom:1.5rem';
 
     const header = document.createElement('div');
     header.style.cssText = 'margin-bottom:.75rem; padding-bottom:.5rem; border-bottom:.5px solid var(--border)';
+    const isSpecial = set.id === 'la-pregunta-del-genio';
     header.innerHTML = `
-      <span class="tag" style="margin-bottom:.25rem">${level.id === 4 ? 'nivel ' + level.id + ' — especial' : 'nivel ' + level.id}</span>
-      <h2 style="font-size:18px">${level.title}</h2>
+      <span class="tag" style="margin-bottom:.25rem">${isSpecial ? 'nivel ' + (idx + 1) + ' — especial' : 'nivel ' + (idx + 1)}</span>
+      <h2 style="font-size:18px">${set.title}</h2>
     `;
     levelEl.appendChild(header);
 
-    level.questions.forEach(q => {
-      const answer = profile.answers[q.id] || '—';
+    set.questions.forEach(q => {
+      const answer = q.answer || '—';
       const card = document.createElement('div');
       card.className = 'card';
       card.innerHTML = `
@@ -81,8 +93,9 @@ async function loadProfile() {
     container.appendChild(levelEl);
   });
 
-  // Compute hash of profile answers
-  const text = JSON.stringify(profile.answers);
+  const answersMap = {};
+  profile.sets.forEach(set => set.questions.forEach(q => { answersMap[q.id] = q.answer; }));
+  const text = JSON.stringify(answersMap);
   const msgBuffer = new TextEncoder().encode(text);
   const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
