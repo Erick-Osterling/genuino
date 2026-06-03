@@ -4,6 +4,7 @@
   "age": 16,
   "created": "2026-05-31",
   "hash_note": "SHA256 de este archivo anclado via OpenTimestamps — ver crypto/timestamps.ots",
+  "timestamp_submitted": "2026-06-03",
   "sets": [
     {
       "id": "lo-basico",
@@ -16,22 +17,26 @@
           "text": "¿Qué hacés lo primero cuando llegás a tu casa?",
           "type": "open",
           "answer": "Me tiro en la cama cinco minutos que terminan siendo una hora.",
-          "hash": ""
+          "hash": "6a6186a64002daa7962eca77426c547b8ceacf4a75c949290ef7ec8eacc48c2b"
         },
         {
           "id": "p1_2",
           "text": "¿Preferís los planes espontáneos o con tiempo?",
           "type": "select",
-          "options": ["Espontáneos", "Con tiempo", "Depende con quién"],
+          "options": [
+            "Espontáneos",
+            "Con tiempo",
+            "Depende con quién"
+          ],
           "answer": "Depende con quién",
-          "hash": ""
+          "hash": "1b07d60a0c9a47eb665551ea2be5dfee9749bd7e84ea44a3c79327b35b58c4ac"
         },
         {
           "id": "p1_3",
           "text": "¿Qué harías si mañana no tuvieras colegio ni obligaciones?",
           "type": "open",
           "answer": "Jugar hasta tarde, pedir pizza y ver algo con mis amigos.",
-          "hash": ""
+          "hash": "eea54adc5f1434cd01bd0898d6134bc99a01ec35a2ed1df1b583c390b8ddf7eb"
         }
       ]
     },
@@ -39,29 +44,35 @@
       "id": "gustos",
       "title": "Gustos",
       "desc": "música, series, lo que te engancha",
-      "requires": ["lo-basico"],
+      "requires": [
+        "lo-basico"
+      ],
       "questions": [
         {
           "id": "p2_1",
           "text": "¿Qué música ponés cuando estás solo en tu cuarto?",
           "type": "open",
           "answer": "Trap y un poco de rock argentino. Depende del humor.",
-          "hash": ""
+          "hash": "7411848a2ea6a18eef877f1e4170f161a7be7460049ba01f307fbf788963f110"
         },
         {
           "id": "p2_2",
           "text": "¿Tenés alguna serie o juego que te tiene enganchado ahora?",
           "type": "open",
           "answer": "Estoy rejugando GTA y viendo Peaky Blinders por segunda vez.",
-          "hash": ""
+          "hash": "8157ea86a7c2e14c0758b977e4871178ee01c5dd72a6c1da1579a07ccc8f449b"
         },
         {
           "id": "p2_3",
           "text": "¿Preferís salir o quedarte en casa el fin de semana?",
           "type": "select",
-          "options": ["Salir siempre", "Quedarme en casa", "Mitad y mitad"],
+          "options": [
+            "Salir siempre",
+            "Quedarme en casa",
+            "Mitad y mitad"
+          ],
           "answer": "Mitad y mitad",
-          "hash": ""
+          "hash": "afc89f5187aed48d14cf48c3ffe056492aca9f5b229151513acde88f14c13f77"
         }
       ]
     },
@@ -69,29 +80,35 @@
       "id": "amigos-y-planes",
       "title": "Amigos y planes",
       "desc": "cómo sos con los demás",
-      "requires": ["gustos"],
+      "requires": [
+        "gustos"
+      ],
       "questions": [
         {
           "id": "p3_1",
           "text": "¿Preferís salir con mucha gente o con pocos amigos?",
           "type": "select",
-          "options": ["Mucha gente", "Pocos amigos", "Solo"],
+          "options": [
+            "Mucha gente",
+            "Pocos amigos",
+            "Solo"
+          ],
           "answer": "Pocos amigos",
-          "hash": ""
+          "hash": "2ea8bf7b52594539d38235667b0e35ac2f311a9beb9cddbad5eb85003aca1095"
         },
         {
           "id": "p3_2",
           "text": "¿Tenés un lugar favorito donde te gusta estar?",
           "type": "open",
           "answer": "La terraza de lo de mi amigo Santi. Se ve toda la ciudad.",
-          "hash": ""
+          "hash": "c84a8b9c3c052eafafa92083c0a639da11da0cb07796c98a4e663674a8c5b735"
         },
         {
           "id": "p3_3",
           "text": "¿Hay algo que te gustaría aprender pero todavía no arrancaste?",
           "type": "open",
           "answer": "Tocar guitarra. Lo intenté y me rendí, pero lo quiero intentar de nuevo.",
-          "hash": ""
+          "hash": "32013edabd9652c255620534234fcbe5e417539353648d1fb5f81cb61b95ff93"
         }
       ]
     }

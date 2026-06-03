@@ -30,13 +30,17 @@
 
   <div class="card" style="margin-top:1.5rem">
     <span class="tag">verificación</span>
-    <p style="margin-bottom:.75rem">Estas respuestas fueron hasheadas y ancladas en Bitcoin antes de que vos llegaras. Podés verificar que no fueron modificadas después.</p>
+    <div style="display:flex; align-items:center; gap:.75rem; margin-bottom:.875rem">
+      <span class="badge badge-amber">anclado en Bitcoin</span>
+      <span style="font-size:11px; color:var(--text3)" id="ts-date"></span>
+    </div>
+    <p style="margin-bottom:.75rem">Si se modifica cualquier respuesta, el hash cambia y el proof deja de verificar.</p>
     <div class="copy-row" id="hash-row" onclick="copyHash()">
       <span id="hash-txt">SHA256: cargando...</span>
     </div>
-    <p style="font-size:11px; color:var(--text3); margin-top:.5rem">
-      v2 (próximamente): ancla verificable via OpenTimestamps →
-      <a href="https://opentimestamps.org" target="_blank" style="color:var(--text3)">opentimestamps.org</a>
+    <p style="font-size:11px; color:var(--text3); margin-top:.625rem">
+      <code style="font-size:10px">ots verify crypto/timestamps.ots -f assets/profile.json</code>
+      &nbsp;·&nbsp;<a href="https://opentimestamps.org" target="_blank" style="color:var(--text3)">opentimestamps.org</a>
     </p>
   </div>
 
@@ -46,8 +50,9 @@
 
 <script>
 async function loadProfile() {
-  const profileRes = await fetch('assets/profile.json');
-  const profile    = await profileRes.json();
+  const profileRes  = await fetch('assets/profile.json');
+  const profileText = await profileRes.text();
+  const profile     = JSON.parse(profileText);
 
   const container  = document.getElementById('profile-answers');
   const canView    = !!sessionStorage.getItem('genuino_profile_unlocked');
@@ -94,16 +99,19 @@ async function loadProfile() {
     container.appendChild(levelEl);
   });
 
-  const answersMap = {};
-  profile.sets.forEach(set => set.questions.forEach(q => { answersMap[q.id] = q.answer; }));
-  const text = JSON.stringify(answersMap);
-  const msgBuffer = new TextEncoder().encode(text);
+  const msgBuffer  = new TextEncoder().encode(profileText);
   const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  const hashArray  = Array.from(new Uint8Array(hashBuffer));
+  const hashHex    = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   document.getElementById('hash-txt').textContent =
-    'SHA256: ' + hashHex.substring(0, 8) + '...' + hashHex.substring(56);
+    'SHA256: ' + hashHex.substring(0, 8) + '…' + hashHex.substring(56);
   document.getElementById('hash-row').dataset.full = hashHex;
+
+  if (profile.timestamp_submitted) {
+    const d = new Date(profile.timestamp_submitted + 'T12:00:00');
+    document.getElementById('ts-date').textContent =
+      d.toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
 }
 
 function copyHash() {
