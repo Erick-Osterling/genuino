@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¿Cómo funciona el dinero que usás hoy? — Erick OS</title>
+  <link rel="stylesheet" href="../css/ficha.css">
+  <script src="../js/ficha.js" defer></script>
+</head>
+<body>
+  <p class="ficha-meta">Nodo 01 — diagnóstico</p>
+  <h1>¿Cómo funciona el dinero que usás hoy?</h1>
+  <p class="subtitulo">Alguien lo imprime. Alguien se lo queda primero. Y todos pagamos por usarlo.</p>
+
+  <div class="diagrama">
+    <svg viewBox="0 0 620 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <defs>
+        <marker id="arr2" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#888780"/>
+        </marker>
+      </defs>
+      <rect x="10" y="30" width="110" height="50" rx="8" fill="#FCEBEB" stroke="#F09595" stroke-width="0.5"/>
+      <text x="65" y="51" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" fill="#791F1F">Banco central</text>
+      <text x="65" y="67" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#A32D2D">imprime dinero</text>
+
+      <line x1="124" y1="55" x2="158" y2="55" stroke="#888780" stroke-width="1" marker-end="url(#arr2)"/>
+
+      <rect x="160" y="30" width="110" height="50" rx="8" fill="#FAEEDA" stroke="#EF9F27" stroke-width="0.5"/>
+      <text x="215" y="51" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" fill="#633806">Llega primero</text>
+      <text x="215" y="67" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#854F0B">a bancos y estados</text>
+
+      <line x1="274" y1="55" x2="308" y2="55" stroke="#888780" stroke-width="1" marker-end="url(#arr2)"/>
+
+      <rect x="310" y="30" width="110" height="50" rx="8" fill="#FCEBEB" stroke="#F09595" stroke-width="0.5"/>
+      <text x="365" y="51" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" fill="#791F1F">Inflación</text>
+      <text x="365" y="67" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#A32D2D">tus ahorros valen menos</text>
+
+      <line x1="424" y1="55" x2="458" y2="55" stroke="#888780" stroke-width="1" marker-end="url(#arr2)"/>
+
+      <rect x="460" y="30" width="110" height="50" rx="8" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="0.5"/>
+      <text x="515" y="51" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" fill="#085041">Vos</text>
+      <text x="515" y="67" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#0F6E56">recibís el dinero usado</text>
+
+      <rect x="185" y="115" width="250" height="45" rx="8" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="0.5"/>
+      <text x="310" y="135" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" font-weight="500" fill="#3C3489">+ intereses sobre toda la masa monetaria</text>
+      <text x="310" y="150" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#534AB7">pagás alquiler por usar el dinero que existe</text>
+
+      <line x1="515" y1="80" x2="515" y2="105" stroke="#AFA9EC" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <line x1="515" y1="105" x2="435" y2="137" stroke="#AFA9EC" stroke-width="0.8" marker-end="url(#arr2)" stroke-dasharray="3,2"/>
+    </svg>
+  </div>
+
+  <div class="problema-grid">
+    <div class="problema-card">
+      <p class="problema-num">problema 01</p>
+      <p class="problema-titulo">Alguien imprime el dinero</p>
+      <p class="problema-desc">Los bancos centrales crean dinero de la nada. Más dinero = cada unidad vale menos. Eso es inflación: un impuesto invisible que nadie votó.</p>
+    </div>
+    <div class="problema-card">
+      <p class="problema-num">problema 02</p>
+      <p class="problema-titulo">El efecto Cantillón</p>
+      <p class="problema-desc">El dinero nuevo no llega a todos igual. Llega primero a bancos y estados — cuando vos lo recibís, los precios ya subieron. El orden importa.</p>
+    </div>
+    <div class="problema-card">
+      <p class="problema-num">problema 03</p>
+      <p class="problema-titulo">Intereses sobre todo</p>
+      <p class="problema-desc">El dinero que circula fue creado con deuda. Alguien cobra interés por su existencia. Es como pagar alquiler por la moneda con la que vivís.</p>
+    </div>
+  </div>
+
+  <div class="explicacion">
+    <p>Si dinero es tiempo y tiempo es vida, entonces la inflación <strong>te roba vida mientras dormís</strong>. El efecto Cantillón asegura que <strong>los que están cerca del poder se enriquecen</strong> con cada nuevo billete. Y los intereses convierten al dinero en un <strong>parásito sistémico</strong> — no importa qué tan duro trabajes, parte de tu vida va a financiar a quien controla la masa monetaria.</p>
+    <p>Ahora imaginá ese sistema en versión digital, con <strong>una sola entidad controlando quién puede pagar y quién no</strong>. El problema no desaparece — se amplifica.</p>
+  </div>
+
+  <div class="advertencia">
+    <p>⚠ El dinero digital centralizado (CBDC) no resuelve ninguno de estos problemas. Los hace más peligrosos: añade vigilancia y control sobre cada transacción.</p>
+  </div>
+
+  <div class="tags">
+    <span class="tag tag-roto">inflación</span>
+    <span class="tag tag-roto">efecto Cantillón</span>
+    <span class="tag tag-roto">intereses</span>
+  </div>
+
+  <div class="caminos">
+    <h3>Seguí explorando</h3>
+    <div class="caminos-lista">
+      <a class="btn-ficha" href="00-que-es-el-dinero.html">← Nodo 00 — ¿Qué es el dinero?</a>
+      <a class="btn-ficha" href="02-que-es-la-descentralizacion.html">Nodo 02 — ¿Qué es la descentralización?</a>
+    </div>
+  </div>
+
+  <a class="volver" href="../index.html">← volver al mapa</a>
+</body>
+</html>

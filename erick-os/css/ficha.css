@@ -49,13 +49,63 @@ h1 {
 
 .diagrama {
   background: var(--fondo-sec);
-  border: 1.5px dashed var(--borde);
+  border: 1.5px solid var(--borde);
   border-radius: 8px;
-  padding: 2.5rem 2rem;
+  padding: 1.5rem 1rem;
   text-align: center;
   color: var(--texto-suave);
   font-size: 0.95rem;
   margin-bottom: 1.75rem;
+}
+
+.problema-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 10px;
+  margin-bottom: 1.75rem;
+}
+
+.problema-card {
+  border-radius: 8px;
+  padding: 1rem;
+  border: 1px solid var(--borde);
+  background: var(--fondo-sec);
+}
+
+.problema-num {
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--texto-suave);
+  margin-bottom: 0.4rem;
+}
+
+.problema-titulo {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--texto);
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.problema-desc {
+  font-size: 0.8rem;
+  color: var(--texto-suave);
+  line-height: 1.5;
+}
+
+.advertencia {
+  background: #FCEBEB;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.75rem;
+  border-left: 3px solid #E24B4A;
+}
+
+.advertencia p {
+  font-size: 0.85rem;
+  color: #501313;
+  margin: 0;
+  line-height: 1.6;
 }
 
 .explicacion {
@@ -80,6 +130,18 @@ h1 {
   padding: 0.25rem 0.75rem;
   font-size: 0.8rem;
   color: var(--texto-suave);
+}
+
+.tag-vital {
+  background: #E1F5EE;
+  border-color: #5DCAA5;
+  color: #0F6E56;
+}
+
+.tag-roto {
+  background: #FAECE7;
+  border-color: #E8A87C;
+  color: #993C1D;
 }
 
 .caminos {
