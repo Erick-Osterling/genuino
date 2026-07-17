@@ -1,0 +1,102 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap');
+  .ficha-root { font-family: 'DM Sans', sans-serif; max-width: 680px; padding: 2rem 0 3rem; color: var(--color-text-primary); }
+  .ficha-number { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 0.5rem; }
+  .ficha-pregunta { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; line-height: 1.25; margin: 0 0 0.5rem; }
+  .ficha-subtitulo { font-size: 15px; color: var(--color-text-secondary); margin: 0 0 2rem; line-height: 1.6; }
+  .diagrama-wrap { background: var(--color-background-secondary); border-radius: var(--border-radius-lg); padding: 1.5rem 1rem; margin-bottom: 2rem; }
+  .explicacion { font-size: 15px; line-height: 1.75; color: var(--color-text-secondary); margin-bottom: 2rem; padding: 0 0.25rem; }
+  .explicacion strong { color: var(--color-text-primary); font-weight: 500; }
+  .divisor { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-text-tertiary); margin-bottom: 1rem; }
+  .caminos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .camino { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1rem 1.25rem; cursor: pointer; transition: border-color 0.15s, background 0.15s; text-align: left; }
+  .camino:hover { border-color: var(--color-border-primary); background: var(--color-background-secondary); }
+  .camino-titulo { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 0.3rem; line-height: 1.3; margin-top: 0.5rem; }
+  .camino-desc { font-size: 12px; color: var(--color-text-tertiary); line-height: 1.5; }
+  .camino-flecha { display: inline-block; margin-top: 0.75rem; font-size: 12px; color: var(--color-text-tertiary); }
+  .tag-vital { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: #E1F5EE; color: #0F6E56; margin-right: 6px; margin-bottom: 6px; font-weight: 500; }
+  .tag-roto { display: inline-block; font-size: 11px; padding: 3px 10px; border-radius: 20px; background: #FAECE7; color: #993C1D; margin-right: 6px; margin-bottom: 6px; font-weight: 500; }
+</style>
+
+<div class="ficha-root">
+  <h2 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">Ficha 01: ¿Qué es realmente el dinero? La cadena tiempo-dinero-cooperación-evolución.</h2>
+
+  <p class="ficha-number">Ficha 01 — fundamentos</p>
+  <h1 class="ficha-pregunta">¿Qué es realmente el dinero?</h1>
+  <p class="ficha-subtitulo">No lo que te enseñaron. Lo que es.</p>
+
+  <div class="diagrama-wrap">
+    <svg viewBox="0 0 620 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+      <defs>
+        <marker id="arr" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+          <path d="M0,0 L7,3.5 L0,7 Z" fill="#888780"/>
+        </marker>
+      </defs>
+      <g transform="translate(10,40)">
+        <rect x="0" y="0" width="100" height="52" rx="8" fill="#E1F5EE" stroke="#5DCAA5" stroke-width="0.5"/>
+        <text x="50" y="21" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="20">⏱</text>
+        <text x="50" y="38" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="500" fill="#085041">Tu tiempo</text>
+        <text x="50" y="51" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#0F6E56">irreversible</text>
+      </g>
+      <line x1="114" y1="66" x2="148" y2="66" stroke="#888780" stroke-width="1" marker-end="url(#arr)"/>
+      <text x="131" y="60" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="9" fill="#888780">=</text>
+      <g transform="translate(150,40)">
+        <rect x="0" y="0" width="100" height="52" rx="8" fill="#E6F1FB" stroke="#85B7EB" stroke-width="0.5"/>
+        <text x="50" y="21" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="20">💰</text>
+        <text x="50" y="38" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="500" fill="#0C447C">Dinero</text>
+        <text x="50" y="51" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#185FA5">tiempo guardado</text>
+      </g>
+      <line x1="254" y1="66" x2="288" y2="66" stroke="#888780" stroke-width="1" marker-end="url(#arr)"/>
+      <g transform="translate(290,40)">
+        <rect x="0" y="0" width="100" height="52" rx="8" fill="#EEEDFE" stroke="#AFA9EC" stroke-width="0.5"/>
+        <text x="50" y="21" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="20">🤝</text>
+        <text x="50" y="38" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="500" fill="#3C3489">Cooperación</text>
+        <text x="50" y="51" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#534AB7">sinergia humana</text>
+      </g>
+      <line x1="394" y1="66" x2="428" y2="66" stroke="#888780" stroke-width="1" marker-end="url(#arr)"/>
+      <g transform="translate(430,40)">
+        <rect x="0" y="0" width="100" height="52" rx="8" fill="#FAEEDA" stroke="#EF9F27" stroke-width="0.5"/>
+        <text x="50" y="21" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="20">🌱</text>
+        <text x="50" y="38" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="12" font-weight="500" fill="#633806">Progreso</text>
+        <text x="50" y="51" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="10" fill="#854F0B">evolución</text>
+      </g>
+      <text x="310" y="135" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="11" fill="#E24B4A" font-weight="500">↑ Si este flujo se interrumpe, todo lo demás colapsa</text>
+    </svg>
+  </div>
+
+  <div class="explicacion">
+    Cada hora que trabajas es <strong>tiempo de tu vida que no vuelve</strong>. El dinero es ese tiempo convertido en algo transferible — la tecnología más antigua de cooperación humana. Sin él, no hay intercambio. Sin intercambio, no hay cooperación. Sin cooperación, no hay progreso.<br><br>
+    Pero hay agentes que viven de <strong>erosionar ese flujo</strong>: la inflación evapora tu tiempo mientras duermes. El interés bancario cobra por guardar lo que ya es tuyo. La corrupción roba vida ajena como negocio normalizado.<br><br>
+    El problema no es el dinero. Es <strong>quién lo controla</strong>.
+  </div>
+
+  <div style="margin-bottom: 1.5rem;">
+    <span class="tag-vital"><i class="ti ti-check" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:3px"></i>dinero = tiempo</span>
+    <span class="tag-vital"><i class="ti ti-check" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:3px"></i>tiempo = vida</span>
+    <span class="tag-roto"><i class="ti ti-x" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:3px"></i>inflación roba vida</span>
+    <span class="tag-roto"><i class="ti ti-x" aria-hidden="true" style="font-size:11px;vertical-align:-1px;margin-right:3px"></i>interés cobra por existir</span>
+  </div>
+
+  <p class="divisor">¿Hacia dónde quieres ir?</p>
+  <div class="caminos">
+    <button class="camino" onclick="sendPrompt('Quiero entender por qué el sistema monetario actual falla — la ficha sobre inflación, bancos centrales y control')">
+      <i class="ti ti-alert-triangle" aria-hidden="true" style="font-size:18px;color:#BA7517"></i>
+      <div class="camino-titulo">¿Cómo nos roba el sistema actual?</div>
+      <div class="camino-desc">Inflación, banca central y la mecánica del control monetario.</div>
+      <span class="camino-flecha">Ficha 02 →</span>
+    </button>
+    <button class="camino" onclick="sendPrompt('Quiero entender qué es Bitcoin y por qué es diferente a todo lo anterior — la ficha sobre Bitcoin como tecnología descentralizada')">
+      <i class="ti ti-currency-bitcoin" aria-hidden="true" style="font-size:18px;color:#0F6E56"></i>
+      <div class="camino-titulo">¿Qué es Bitcoin y por qué importa?</div>
+      <div class="camino-desc">La primera tecnología monetaria sin dueño, sin permiso, sin inflación.</div>
+      <span class="camino-flecha">Ficha 07 →</span>
+    </button>
+    <button class="camino" onclick="sendPrompt('Quiero entender la visión completa del proyecto — por qué la tecnología descentralizada es clave para la salvación humana')">
+      <i class="ti ti-world" aria-hidden="true" style="font-size:18px;color:#534AB7"></i>
+      <div class="camino-titulo">¿Cuál es la visión grande?</div>
+      <div class="camino-desc">Tecnología descentralizada, autonomía humana y cooperación sin intermediarios.</div>
+      <span class="camino-flecha">Ficha 12 →</span>
+    </button>
+  </div>
+</div>

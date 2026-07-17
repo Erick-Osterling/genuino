@@ -1,112 +1,56 @@
-# genuino — contexto para Claude
+# Genuino — CLAUDE.md
 
-## Qué es este proyecto
+Punto de entrada para Claude Code. Este repositorio contiene la
+documentación fundacional del proyecto Genuino, unificada y aprobada por
+el fundador el 2026-07-17.
 
-App estática (HTML + CSS + JS vanilla) para conocer personas sin intermediarios. Sin backend, sin base de datos, sin cookies. Deployable en GitHub Pages o IPFS.
+## Antes de hacer cualquier cosa
 
-El perfil del dueño tiene respuestas a preguntas organizadas en sets. El visitante responde las mismas preguntas antes de poder ver las respuestas del dueño. Al final se comparan lado a lado con un score de cosas en común.
+Lee `docs/005_AGENT_INSTRUCTIONS.md`. Ahí está tu rol, el orden de
+lectura obligatorio y las reglas del proyecto. Resumen mínimo:
 
-## Cómo correrlo localmente
+1. **Lectura obligatoria en orden:** `docs/000_VISION.md` →
+   `docs/001_ECOSYSTEM.md` → `docs/002_NODE_MODEL.md` →
+   `docs/003_FIRST_PRINCIPLES.md` → `docs/004_ARCHITECTURE.md` →
+   `docs/005_AGENT_INSTRUCTIONS.md` → `docs/DECISIONS.md` →
+   `docs/ROADMAP.md`.
+2. **Según la tarea:** `docs/007_ERICK_OS.md` (si trabajas en Erick OS),
+   `docs/008_PROTOCOL_EVOLUTION.md` (si propones algo al protocolo),
+   `docs/006_KNOWLEDGE_ARCHITECTURE.md` y
+   `docs/009_REPRESENTATION_THEORY.md` (contexto exploratorio).
 
-```bash
-python3 -m http.server 8765 --directory /home/erick/repos/genuino
-# Abre en Brave: http://localhost:8765
-```
+## Reglas no negociables
 
-Para testing automatizado (Selenium + geckodriver):
-```bash
-cd /tmp && npm install selenium-webdriver
-# geckodriver disponible en /snap/firefox/current/usr/lib/firefox/geckodriver
-# firefox binary en /snap/firefox/current/usr/lib/firefox/firefox
-```
+- Ninguna decisión técnica importante puede contradecir
+  `docs/003_FIRST_PRINCIPLES.md` (10 principios, vigentes). Si hay
+  conflicto, señálalo; no lo resuelvas por tu cuenta.
+- La documentación es la fuente de verdad, no el código.
+- Tú implementas; la visión y los principios se deciden entre el fundador
+  y Claude (chat). No los reinterpretes ni los completes.
+- Registra (no decidas) en `docs/DECISIONS.md` cuando el fundador
+  confirme una decisión durante una sesión contigo.
+- Términos definidos que se usan tal cual: **Nodo** (= "ficha", término
+  legacy), **Erick OS**, **IA garantizada**, **niveles de soberanía**,
+  **patrón «[Nombre] OS»**.
+- No completes secciones marcadas como PENDIENTE (ej. la priorización
+  global de `docs/ROADMAP.md`).
 
-## Estructura de archivos
+## Estado actual del proyecto
 
-```
-genuino/
-├── index.html           # Manifiesto / entrada
-├── profile.html         # Perfil del dueño — bloqueado hasta que el visitante conteste
-├── questions.html       # Flujo de preguntas (lee de assets/profile.json)
-├── reveal.html          # Comparación de respuestas + score
-├── learn.html           # Introducción a Bitcoin
-├── assets/
-│   ├── style.css        # Tokens de diseño compartidos
-│   ├── profile.json     # Perfil público — preguntas + respuestas del dueño
-│   └── questions.json   # Banco de preguntas por tema (referencia, no se usa en el flujo principal)
-└── .gitignore           # Excluye perfiles privados (tyler.html, etc.)
-```
+- Documentación fundacional unificada (2026-07-17): `000`–`009` +
+  `ROADMAP.md` + `DECISIONS.md`. Versiones y decisiones registradas en
+  `docs/DECISIONS.md`.
+- Candidato a primer prototipo (ver `docs/ROADMAP.md`): un grafo de
+  conceptos real cuyo primer contenido sea el propio conocimiento
+  acumulado del proyecto Genuino.
+- Existe trabajo previo de Erick OS fuera de este árbol: carpeta
+  `/erick-os` junto a `genuino/` y `salvacion/`, que reutiliza el patrón
+  técnico de tarjetas de `salvacion/` (`ficha.css`, `ficha.js`) con
+  acento violeta/índigo. Ver `docs/007_ERICK_OS.md` y `docs/DECISIONS.md`
+  (2026-07-10).
 
-## Estructura de datos (v2.0.0)
+## Cómo trabajar
 
-### assets/profile.json
-
-```json
-{
-  "version": "2.0.0",
-  "name": "Pedro",
-  "sets": [
-    {
-      "id": "lo-basico",
-      "title": "Lo básico",
-      "desc": "el día a día",
-      "requires": [],
-      "questions": [
-        {
-          "id": "p1_1",
-          "text": "¿Qué hacés lo primero cuando llegás a tu casa?",
-          "type": "open",
-          "answer": "...",
-          "hash": ""
-        }
-      ]
-    },
-    {
-      "id": "gustos",
-      "title": "Gustos",
-      "requires": ["lo-basico"],
-      "questions": [...]
-    }
-  ]
-}
-```
-
-El campo `requires` es la clave de la arquitectura: un set solo es accesible después de completar los sets que lista. Si está vacío, el set está disponible desde el inicio. Soporta tanto progresión lineal como estructuras ramificadas.
-
-### assets/questions.json
-
-Banco público de preguntas organizado por tópicos (`topics[]`). No se usa en el flujo principal — sirve como referencia para que otros creen sus propios perfiles.
-
-## Flujo de usuario
-
-1. Visitante entra a `profile.html` → ve perfil bloqueado con mensaje "respondé primero"
-2. Va a `questions.html` → responde los sets en orden (respeta `requires`)
-3. Al terminar, las respuestas se guardan en `sessionStorage` con clave `genuino_answers`
-4. Redirige a `reveal.html` → comparación lado a lado + score de cosas en común
-5. Vuelve a `profile.html` → ahora ve las respuestas del dueño
-
-## Decisiones de diseño tomadas
-
-- **Las respuestas del dueño se ocultan** hasta que el visitante conteste — nadie ve lo del otro antes de comprometerse a responder.
-- **questions.html lee directamente de profile.json** (no del banco questions.json). El perfil es la fuente de verdad de qué preguntas se hacen.
-- **El perfil público es Pedro** (16 años, preguntas livianas). El perfil de Tyler es privado y está en .gitignore.
-- **Sin framing romántico** — el lenguaje es neutro, orientado a conocer personas en general (no dating).
-- **Sin jerga técnica** en los textos visibles — nada de "firmado criptográficamente", "forkear", "JSON", etc.
-
-## Perfil actual (Pedro)
-
-- 3 sets: "Lo básico" → "Gustos" → "Amigos y planes"
-- Preguntas livianas y concretas, no filosóficas
-- Email de contacto: pedro@proton.me
-
-## Roadmap
-
-- **v1** — cascarón estático ✅
-- **v2** — firma criptográfica via OpenTimestamps (hash SHA-256 ya preparado en profile.json)
-- **v3** — identidad descentralizada via Nostr + Lightning micropayments
-- **v4** — protocolo abierto, cualquiera construye sobre el mismo formato
-
-## GitHub
-
-- Repo: `git@github.com:Erick-Osterling/genuino.git`
-- Branch principal: `main`
-- GitHub Pages: `https://erick-osterling.github.io/genuino/`
+Comprender antes que programar. Simplicidad antes que sofisticación.
+Proponer alternativas ante la incertidumbre, con ventajas y desventajas,
+y pedir decisión al fundador antes de consolidar cambios importantes.
